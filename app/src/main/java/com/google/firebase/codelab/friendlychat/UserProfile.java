@@ -62,7 +62,7 @@ public class UserProfile extends AppCompatActivity
         mDatabase = FirebaseDatabase.getInstance().getReference();
         User user1 = new User("user2","Saurabh Misra","http://randomurl.com","52.456","32.234","5700 Fifth","I am cool" );
         mDatabase.child(mUsersChild).child(user1.userid).setValue(user1);
-        mDatabase.child(mUsersChild).addListenerForSingleValueEvent(
+        mDatabase.child(mUsersChild).child(user1.userid).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
