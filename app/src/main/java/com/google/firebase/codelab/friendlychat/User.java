@@ -10,18 +10,22 @@ public class User {
     public String profilePhoto;
     public String latitude;
     public String longitude;
-    public String address;
+    public String pickupAddress;
     public String bio;
+    public String phoneNumber;
+    public String dropoffAddress;
     User(){
 
     }
-    User(String userid, String username, String profilePhoto, String latitude, String longitude, String address,String bio){
+    User(String userid, String username, String profilePhoto, String latitude, String longitude, String pickupAddress,String bio,String dropoffAddress,String phoneNumber){
         this.userid = userid;
         this.username = username;
         this.profilePhoto = profilePhoto;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.address =address;
         this.bio = bio;
+        this.dropoffAddress =dropoffAddress;
+        this.pickupAddress =pickupAddress;
+        this.phoneNumber = phoneNumber;
     }
 }

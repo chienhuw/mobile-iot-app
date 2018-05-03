@@ -7,12 +7,12 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/profilePhoto"
         android:layout_width="wrap_content"
         android:layout_height="211dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleUser"
         app:srcCompat="@drawable/profile_picture" />
 
     <TextView
@@ -23,18 +23,18 @@
         android:layout_marginTop="8dp"
         android:text="Goes to:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/profilePhoto"
         tools:text="@string/user_profile_goesto" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/activityPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:text="Negley Martial Arts"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/profilePhoto" />
 
     <TextView
         android:id="@+id/textView3"
@@ -61,11 +61,11 @@
         android:layout_height="2dp"
         android:layout_marginTop="70dp"
         android:background="#dfdfdf"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/profilePhoto"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/bio"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:text="I live at Shadyside and drop my son to Negley Martial Arts class during the weekdays. Message me if you think we could share our car together."
@@ -79,7 +79,7 @@
         android:layout_width="fill_parent"
         android:layout_height="2dip"
         android:background="#dfdfdf"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/bio"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
@@ -92,7 +92,7 @@
         tools:text="@string/user_profile_common_connections" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageFriend1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="20dp"
@@ -109,17 +109,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:text="Saurabh Misra"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintEnd_toEndOf="@+id/imageFriend1"
+        app:layout_constraintStart_toStartOf="@+id/imageFriend1"
+        app:layout_constraintTop_toBottomOf="@+id/imageFriend1" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imageFriend2"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="24dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/imageFriend1"
+        app:layout_constraintTop_toTopOf="@+id/imageFriend1"
         app:srcCompat="@drawable/dp2" />
 
     <TextView
@@ -130,9 +130,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:text="Lav Khanna"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintEnd_toEndOf="@+id/imageFriend2"
+        app:layout_constraintStart_toStartOf="@+id/imageFriend2"
+        app:layout_constraintTop_toBottomOf="@+id/imageFriend2" />
 
     <Button
         android:id="@+id/button"
@@ -143,6 +143,17 @@
         android:text="Chat"
         android:onClick="startChatScreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/profilePhoto" />
+
+    <TextView
+        android:id="@+id/titleUser"
+        android:layout_width="386dp"
+        android:layout_height="47dp"
+        android:background="#FF9800"
+        android:gravity="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
 
 </android.support.constraint.ConstraintLayout>

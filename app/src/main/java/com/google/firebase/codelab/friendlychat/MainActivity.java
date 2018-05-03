@@ -76,6 +76,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private static final String TAG = "MainActivity";
-    public static final String MESSAGES_CHILD = "messages";
+    public static String MESSAGES_CHILD = "messages";
+    private String chatIdentifier = "";
     private static final int REQUEST_INVITE = 1;
     private static final int REQUEST_IMAGE = 2;
     private static final String LOADING_IMAGE_URL = "https://www.google.com/images/spin-32.gif";
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity
     public static final String ANONYMOUS = "anonymous";
     private static final String MESSAGE_SENT_EVENT = "message_sent";
     private String mUsername;
+    private String mUserId;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
     private GoogleApiClient mGoogleApiClient;
@@ -143,6 +146,7 @@ public class MainActivity extends AppCompatActivity
             return;
         } else {
             mUsername = mFirebaseUser.getDisplayName();
+            mUserId = mFirebaseUser.getUid();
             if (mFirebaseUser.getPhotoUrl() != null) {
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
             }
@@ -173,6 +177,7 @@ public class MainActivity extends AppCompatActivity
         fetchConfig();
         // Initialize ProgressBar and RecyclerView.
         // New child entries
+        String otherUser = getIntent().getStringExtra("userid");
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         SnapshotParser<FriendlyMessage> parser = new SnapshotParser<FriendlyMessage>() {
             @Override
@@ -184,7 +189,9 @@ public class MainActivity extends AppCompatActivity
                 return friendlyMessage;
             }
         };
-
+        String [] usersChatting = {mUserId, otherUser};
+        Arrays.sort(usersChatting);
+        MESSAGES_CHILD += "/"+usersChatting[0]+"-"+usersChatting[1];
         DatabaseReference messagesRef = mFirebaseDatabaseReference.child(MESSAGES_CHILD);
         FirebaseRecyclerOptions<FriendlyMessage> options =
                 new FirebaseRecyclerOptions.Builder<FriendlyMessage>()
