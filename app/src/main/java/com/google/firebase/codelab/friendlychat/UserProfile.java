@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -88,6 +90,8 @@ public class UserProfile extends Activity
                         bio.setText(user.bio);
                         TextView userTitle = findViewById(R.id.titleUser);
                         userTitle.setText(user.username);
+                        TextView activityPlace = (TextView) findViewById(R.id.activityPlace);
+                        activityPlace.setText(user.dName);
                         if (user == null) {
                             Log.e(TAG, "User " + userId + " is NULL UNIQUE");
                         } else {
@@ -132,6 +136,8 @@ public class UserProfile extends Activity
             bio.setText(user.bio);
             TextView userTitle = findViewById(R.id.titleUser);
             userTitle.setText(user.username);
+            TextView activityPlace = (TextView) findViewById(R.id.activityPlace);
+            activityPlace.setText(user.dName);
         }
 
 //        mDatabase.child(mUsersChild).child(user1.userid).addListenerForSingleValueEvent(

@@ -24,8 +24,6 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
     }
-
-
     public void toProfile(View view) {
 
         Intent intent = new Intent(this, UserProfile.class);
@@ -33,5 +31,8 @@ public class MainPage extends AppCompatActivity {
         intent.putExtra("userType","other");
         startActivity(intent);
     }
-
+    public void toCarpools(View view){
+        Intent intent = new Intent(this, UserList.class);
+        startActivity(intent);
+    }
 }

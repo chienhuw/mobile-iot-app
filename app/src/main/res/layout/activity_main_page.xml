@@ -29,6 +29,7 @@
         android:layout_marginTop="15dp"
         android:text="Carpools"
         android:id="@+id/carpool"
+        android:onClick="toCarpools"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_below="@id/profile" />

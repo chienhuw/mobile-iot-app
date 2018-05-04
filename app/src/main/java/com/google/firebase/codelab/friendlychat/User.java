@@ -33,4 +33,8 @@ public class User {
         this.pickupAddress =pickupAddress;
         this.phoneNumber = phoneNumber;
     }
+    @Override
+    public String toString() {
+        return username;
+    }
 }

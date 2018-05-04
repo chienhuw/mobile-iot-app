@@ -1,5 +1,6 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,8 +38,8 @@ public class UserList extends AppCompatActivity {
     private String userAddr = "1400 Locust St, Pittsburgh, PA 15219, USA";
     ListView listView;
     List<String> userIdList = new ArrayList<>();
-    List<String> userList = new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter;
+    List<User> userList = new ArrayList<>();
+    ArrayAdapter<User> arrayAdapter;
     String dLatitude, dLongitude;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,48 +47,28 @@ public class UserList extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         userList.clear();
         listView = (ListView) findViewById(R.id.listView);
-        //dropoff->address->users
-        //final Semaphore sem0 = new Semaphore(0);
-        //
-        arrayAdapter = new ArrayAdapter<String>(UserList.this, android.R.layout.simple_list_item_1, userList);
+        arrayAdapter = new ArrayAdapter<User>(UserList.this, android.R.layout.simple_list_item_1, userList);
         listView.setAdapter(arrayAdapter);
         //dLatitude = mDatabase.child(maddreessChild1).child("userAddr")
         mDatabase.child(maddreessChild1).child(userAddr).child(mUsersChild).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    //String user = (String)dataSnapshot.getValue();
-                    //System.out.println(value);
                     HashMap<String, String> users = (HashMap<String, String>) dataSnapshot.getValue();
                     for (String userId : users.keySet()) {
                         //synchronized (userIdList) {
                         userIdList.add(userId);
 
-                        //}
                     }
-
-                    //int userNumber = userIdList.size();
-
                 }
-
-                //sem0.release();
-                //users->userid->username
                 for (String userId : userIdList) {
                     mDatabase.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            //for (DataSnapshot child: dataSnapshot.getChildren()) {
                             User user = dataSnapshot.getValue(User.class);
                             //synchronized (userList) {
-                            userList.add(user.username);
+                            userList.add(user);
                             arrayAdapter.notifyDataSetChanged();
-
-
-                            //}
-                            //sem.release();
-
-                            //}
 
                         }
 
@@ -107,69 +88,14 @@ public class UserList extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                User user = (User)listView.getItemAtPosition(position);
+                Intent intent = new Intent(UserList.this, UserProfile.class);
+                intent.putExtra("userId",user.userid);
+                intent.putExtra("userType","other");
+                startActivity(intent);
             }
         });
-        /*
-        try {
-            sem0.acquire();
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        */
-        /*
-        Log.d(TAG,"Reached here");
-
-
-        //final Semaphore sem = new Semaphore(1-userIdList.size());
-        for (String userId: userIdList) {
-            mDatabase.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    //for (DataSnapshot child: dataSnapshot.getChildren()) {
-                        User user = dataSnapshot.getValue(User.class);
-                        //synchronized (userList) {
-                            userList.add(user.username);
-                        //}
-                        //sem.release();
-
-                    //}
-
-                }
-
-
-
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    //sem.release();
-                }
-            });
-
-        }
-        /*
-        try {
-            sem.acquire();
-        } catch (InterruptedException e) {
-
-        }
-        */
-            //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(UserList.this, android.R.layout.simple_list_item_1, userList);
-            //listView.setAdapter(arrayAdapter);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
