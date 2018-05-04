@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.app.Activity;
@@ -59,7 +60,8 @@ public class Register extends AppCompatActivity{
     private TextView mName2;
     private TextView mAddress2;
     private TextView mAttributions;
-    private EditText nameText, phoneText;
+    private EditText nameText, phoneText, bioText;
+    private CheckBox checkbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,6 +175,9 @@ public class Register extends AppCompatActivity{
         phoneText = (EditText) findViewById(R.id.editText3);
         mAddress = (TextView) findViewById(R.id.addtextView);
         mAddress2 = (TextView) findViewById(R.id.addtextView2);
+        checkbox = (CheckBox) findViewById(R.id.checkBox);
+        bioText = (EditText) findViewById(R.id.bioEdit);
+
 
         String name = nameText.getText().toString();
         String phone = phoneText.getText().toString();
@@ -180,6 +185,8 @@ public class Register extends AppCompatActivity{
         String pickName = mName.getText().toString();
         String drop = mAddress2.getText().toString();
         String dropName = mName2.getText().toString();
+        String bio = bioText.getText().toString();
+        boolean checkCar = checkbox.isChecked();
 
         LatLng pickGeo = getLocationFromAddress(this,pick);
         String picklat = String.valueOf(pickGeo.latitude);
@@ -191,8 +198,7 @@ public class Register extends AppCompatActivity{
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        User user1 = new User(mFirebaseUser.getUid(), name, "http://somephoto.jpg",picklat,picklong, pick, pickName, drop, dropName, "I am cooler",phone);
-
+        User user1 = new User(mFirebaseUser.getUid(), name, "http://somephoto.jpg",picklat,picklong, pick, pickName, drop, dropName, bio,phone, checkCar);
             mDatabase.child(mUsersChild).child(user1.userid).setValue(user1);
 
         //dropoff table
