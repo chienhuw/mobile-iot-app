@@ -29,6 +29,8 @@ public class MainPage extends AppCompatActivity {
     public void toProfile(View view) {
 
         Intent intent = new Intent(this, UserProfile.class);
+        intent.putExtra("userId",SharedUser.getUser().userid);
+        intent.putExtra("userType","other");
         startActivity(intent);
     }
 
