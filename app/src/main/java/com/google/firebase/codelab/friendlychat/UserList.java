@@ -72,21 +72,24 @@ public class UserList extends Fragment {
 //        });
         mDatabase = FirebaseDatabase.getInstance().getReference();
         userList.clear();
+        userIdList.clear();
         listView = (ListView) rootView.findViewById(R.id.listView);
         arrayAdapter = new ArrayAdapter<User>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, userList);
         listView.setAdapter(arrayAdapter);
-        //dLatitude = mDatabase.child(maddreessChild1).child("userAddr")
-        mDatabase.child(maddreessChild1).child(userAddr).child(mUsersChild).addListenerForSingleValueEvent(new ValueEventListener() {
+        //dLatitude = mDatabase.child(maddreessChild1).child("ueserAddr")
+        User user = SharedUser.getUser();
+        mDatabase.child(maddreessChild1).child(user.dropoffAddress).child(mUsersChild).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                //for (DataSnapshot child : dataSnapshot.getChildren()) {
                     HashMap<String, String> users = (HashMap<String, String>) dataSnapshot.getValue();
+                    if(users==null)return;
                     for (String userId : users.keySet()) {
                         //synchronized (userIdList) {
                         userIdList.add(userId);
 
                     }
-                }
+                //}
                 for (String userId : userIdList) {
                     mDatabase.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
