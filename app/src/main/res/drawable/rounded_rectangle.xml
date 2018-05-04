@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle" >
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!-- View background color -->
-    <solid
-        android:color="#FF6E00" >
-    </solid>
+    <solid android:color="#FFFFFF" />
 
-    <!-- The radius makes the corners rounded -->
+    <stroke
+        android:width="1dp"
+        android:color="#2f6699" />
     <corners
-        android:radius="20dp">
-    </corners>
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp"
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp"
+
+        />
+
 </shape>
 
-<!--<TextView-->
-<!--android:text="hi man, how are you?"-->
-<!--android:background="@drawable/rounded_rectangle_orange"-->
-<!--android:layout_width="wrap_content"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:padding="8dp"-->
-<!--android:textColor="#ffffff"-->
-<!--android:layout_marginTop="4dp"/>-->
+    <!--<TextView-->
+    <!--android:text="hi man, how are you?"-->
+    <!--android:background="@drawable/rounded_rectangle_orange"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:padding="8dp"-->
+    <!--android:textColor="#ffffff"-->
+    <!--android:layout_marginTop="4dp"/>-->

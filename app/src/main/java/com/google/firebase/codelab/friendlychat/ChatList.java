@@ -47,6 +47,7 @@ public class ChatList extends Fragment{
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //for (DataSnapshot child : dataSnapshot.getChildren()) {
                     HashMap<String, String> users = (HashMap<String, String>) dataSnapshot.getValue();
+                    if(users ==null) return;
                     for (String userId : users.keySet()) {
                         //synchronized (userIdList) {
                         userIdList.add(userId);

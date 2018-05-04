@@ -178,7 +178,9 @@ public class ChatActivity extends AppCompatActivity
                 return friendlyMessage;
             }
         };
+
         mFirebaseDatabaseReference.child("activeChats").child(mUserId).child(otherUser).setValue(otherUser);
+        mFirebaseDatabaseReference.child("activeChats").child(otherUser).child(mUserId).setValue(mUserId);
         String [] usersChatting = {mUserId, otherUser};
         Arrays.sort(usersChatting);
         MESSAGES_CHILD += "/"+usersChatting[0]+"-"+usersChatting[1];
