@@ -1,5 +1,6 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -9,7 +10,9 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -198,7 +201,7 @@ public class Register extends AppCompatActivity{
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        User user1 = new User(mFirebaseUser.getUid(), name, "http://somephoto.jpg",picklat,picklong, pick, pickName, drop, dropName, bio,phone, checkCar);
+        User user1 = new User(mFirebaseUser.getUid(), name, "http://www.a-star-aspirations.co.uk/wp-content/uploads/2014/03/Emotes-face-smile-icon.png",picklat,picklong, pick, pickName, drop, dropName, bio,phone, checkCar);
             mDatabase.child(mUsersChild).child(user1.userid).setValue(user1);
 
         //dropoff table

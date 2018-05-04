@@ -13,6 +13,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.concurrent.Semaphore;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -21,6 +23,7 @@ import static android.content.ContentValues.TAG;
 
  public class SharedUser{
     private static User user;
+    static Semaphore sem = new Semaphore(0);
     public static User getUser(final String userid){
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -36,6 +39,7 @@ import static android.content.ContentValues.TAG;
                     } else {
                         Log.d(TAG, "Retrieved user " + userid + " with name " + user.username);
                     }
+                    sem.release();
                 }
 
                 @Override
@@ -44,8 +48,13 @@ import static android.content.ContentValues.TAG;
                 }
             }
         );
-
+        try{
+            sem.acquire();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
         return user;
+
     }
     public static User getUser(){
         return user;

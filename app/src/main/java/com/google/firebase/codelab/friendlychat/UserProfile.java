@@ -180,6 +180,7 @@ public class UserProfile extends Activity
     public void startEditScreen(View view){
         Intent intent = new Intent(UserProfile.this,Register.class);
         intent.putExtra("userid",user.userid);
+        intent.putExtra("editing","true");
         UserProfile.this.startActivity(intent);
     }
     @Override

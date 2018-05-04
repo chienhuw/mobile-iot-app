@@ -1,10 +1,15 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.support.v4.app.Fragment;
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -24,7 +29,7 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class UserList extends AppCompatActivity {
+public class UserList extends Fragment {
     private String mUsername;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -41,13 +46,34 @@ public class UserList extends AppCompatActivity {
     List<User> userList = new ArrayList<>();
     ArrayAdapter<User> arrayAdapter;
     String dLatitude, dLongitude;
-    protected void onCreate(Bundle savedInstanceState) {
+    public UserList(){}
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_list);
+        //setContentView(R.layout.activity_user_list);
+        View rootView = inflater.inflate(R.layout.activity_user_list,container,false);
+//        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+//        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//               switch (tab.getPosition()){
+//                   case 0:
+//               }
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
         mDatabase = FirebaseDatabase.getInstance().getReference();
         userList.clear();
-        listView = (ListView) findViewById(R.id.listView);
-        arrayAdapter = new ArrayAdapter<User>(UserList.this, android.R.layout.simple_list_item_1, userList);
+        listView = (ListView) rootView.findViewById(R.id.listView);
+        arrayAdapter = new ArrayAdapter<User>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, userList);
         listView.setAdapter(arrayAdapter);
         //dLatitude = mDatabase.child(maddreessChild1).child("userAddr")
         mDatabase.child(maddreessChild1).child(userAddr).child(mUsersChild).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -89,13 +115,14 @@ public class UserList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User user = (User)listView.getItemAtPosition(position);
-                Intent intent = new Intent(UserList.this, UserProfile.class);
+                Intent intent = new Intent(getActivity(), UserProfile.class);
                 intent.putExtra("userId",user.userid);
                 intent.putExtra("userType","other");
                 startActivity(intent);
             }
         });
-
+        return rootView;
     }
+
 
 }

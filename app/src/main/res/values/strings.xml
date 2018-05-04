@@ -17,6 +17,8 @@
     <string name="user_profile_goesto">Goes To:</string>
     <string name="user_profile_time">Time:</string>
     <string name="user_profile_common_connections">Common Connections:</string>
-
+    <string name="profile">Profile</string>
+    <string name="carpools">Carpools</string>
+    <string name="chats">Chats</string>
 
 </resources>

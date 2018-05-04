@@ -1,10 +1,13 @@
 package com.google.firebase.codelab.friendlychat;
 
+import android.support.v4.app.Fragment;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -23,18 +26,22 @@ import java.util.List;
  */
 
 
-public class ChatList extends AppCompatActivity{
+public class ChatList extends Fragment{
     private DatabaseReference mDatabase;
     private ListView listView;
     private List<String> userIdList =new ArrayList<>();
     private List<User> userList = new ArrayList<>();
-    public void onCreate(Bundle icicle){
+    public ChatList(){}
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle icicle){
         super.onCreate(icicle);
-        setContentView(R.layout.chat_list_layout);
-        final ChatArrayAdapter adapter = new ChatArrayAdapter(this, userList);
-        listView = (ListView) findViewById(R.id.listView);
+        View rootView = inflater.inflate(R.layout.chat_list_layout,container,false);
+        //setContentView(R.layout.chat_list_layout);
+        final ChatArrayAdapter adapter = new ChatArrayAdapter(getActivity().getApplicationContext(), userList);
+        listView = (ListView) rootView.findViewById(R.id.listView);
         listView.setAdapter(adapter);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        userList.clear();
+        userIdList.clear();
         mDatabase.child("activeChats").child(SharedUser.getUser().userid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -75,13 +82,13 @@ public class ChatList extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User user = (User)listView.getItemAtPosition(position);
-                Intent intent = new Intent(ChatList.this, ChatActivity.class);
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
                 intent.putExtra("userid",user.userid);
                 ChatList.this.startActivity(intent);
             }
         });
 
 
-
+    return rootView;
     }
 }
