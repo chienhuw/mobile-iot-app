@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private static final String TAG = "MainActivity";
-    public static String MESSAGES_CHILD = "messages";
+    public String MESSAGES_CHILD = "messages";
     private String chatIdentifier = "";
     private static final int REQUEST_INVITE = 1;
     private static final int REQUEST_IMAGE = 2;
@@ -192,6 +192,7 @@ public class MainActivity extends AppCompatActivity
         String [] usersChatting = {mUserId, otherUser};
         Arrays.sort(usersChatting);
         MESSAGES_CHILD += "/"+usersChatting[0]+"-"+usersChatting[1];
+        Log.d(TAG,"Message URL" + MESSAGES_CHILD);
         DatabaseReference messagesRef = mFirebaseDatabaseReference.child(MESSAGES_CHILD);
         FirebaseRecyclerOptions<FriendlyMessage> options =
                 new FirebaseRecyclerOptions.Builder<FriendlyMessage>()
