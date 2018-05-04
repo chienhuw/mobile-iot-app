@@ -7,6 +7,7 @@ import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -161,8 +162,6 @@ public class Register extends AppCompatActivity{
         }
 
 
-
-
     }
 
     // check login
@@ -178,6 +177,7 @@ public class Register extends AppCompatActivity{
         String name = nameText.getText().toString();
         String phone = phoneText.getText().toString();
         String pick = mAddress.getText().toString();
+        String pickName = mName.getText().toString();
         String drop = mAddress2.getText().toString();
         String dropName = mName2.getText().toString();
 
@@ -191,15 +191,16 @@ public class Register extends AppCompatActivity{
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        User user1 = new User(mFirebaseUser.getUid(), name, "http://somephoto.jpg",picklat,picklong, pick,"I am cooler", drop,phone);
-        mDatabase.child(mUsersChild).child(user1.userid).setValue(user1);
+        User user1 = new User(mFirebaseUser.getUid(), name, "http://somephoto.jpg",picklat,picklong, pick, pickName, drop, dropName, "I am cooler",phone);
+
+            mDatabase.child(mUsersChild).child(user1.userid).setValue(user1);
 
         //dropoff table
-        //mDatabase.child(maddreessChild1).setValue(dropName);
-        mDatabase.child(maddreessChild1).child(dropName).child("latitude").setValue(droplat);
-        mDatabase.child(maddreessChild1).child(dropName).child("longitude").setValue(droplong);
-        mDatabase.child(maddreessChild1).child(dropName).child("users").child(mFirebaseUser.getUid()).setValue(mFirebaseUser.getUid());
-
+        mDatabase.child(maddreessChild1).child(drop).child("name").setValue(dropName);
+        mDatabase.child(maddreessChild1).child(drop).child("latitude").setValue(droplat);
+        mDatabase.child(maddreessChild1).child(drop).child("longitude").setValue(droplong);
+        mDatabase.child(maddreessChild1).child(drop).child("users").child(mFirebaseUser.getUid()).setValue(mFirebaseUser.getUid());
+        SharedUser.setUser(user1);
         //mDatabase.child(maddreessChild1).child(dropName).setValue();
 
 
@@ -237,5 +238,7 @@ public class Register extends AppCompatActivity{
 
         return resLatLng;
     }
+
+
 
 }
