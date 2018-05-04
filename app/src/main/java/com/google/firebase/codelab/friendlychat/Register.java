@@ -199,7 +199,7 @@ public class Register extends AppCompatActivity{
         mDatabase.child(maddreessChild1).child(dropName).child("latitude").setValue(droplat);
         mDatabase.child(maddreessChild1).child(dropName).child("longitude").setValue(droplong);
         mDatabase.child(maddreessChild1).child(dropName).child("users").child(mFirebaseUser.getUid()).setValue(mFirebaseUser.getUid());
-
+        SharedUser.setUser(user1);
         //mDatabase.child(maddreessChild1).child(dropName).setValue();
 
 
