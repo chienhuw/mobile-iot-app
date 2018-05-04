@@ -44,10 +44,6 @@ import android.view.LayoutInflater;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.appinvite.AppInvite;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -56,7 +52,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -66,12 +61,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.google.firebase.appindexing.Action;
-import com.google.firebase.appindexing.FirebaseAppIndex;
-import com.google.firebase.appindexing.FirebaseUserActions;
-import com.google.firebase.appindexing.Indexable;
-import com.google.firebase.appindexing.builders.Indexables;
-import com.google.firebase.appindexing.builders.PersonBuilder;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -82,7 +71,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity
+public class ChatActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener {
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
@@ -100,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "ChatActivity";
     public String MESSAGES_CHILD = "messages";
     private String chatIdentifier = "";
     private static final int REQUEST_INVITE = 1;
@@ -189,6 +178,7 @@ public class MainActivity extends AppCompatActivity
                 return friendlyMessage;
             }
         };
+        mFirebaseDatabaseReference.child("activeChats").child(mUserId).child(otherUser).setValue(otherUser);
         String [] usersChatting = {mUserId, otherUser};
         Arrays.sort(usersChatting);
         MESSAGES_CHILD += "/"+usersChatting[0]+"-"+usersChatting[1];
@@ -246,10 +236,10 @@ public class MainActivity extends AppCompatActivity
 
                 viewHolder.messengerTextView.setText(friendlyMessage.getName());
                 if (friendlyMessage.getPhotoUrl() == null) {
-                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(MainActivity.this,
+                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(ChatActivity.this,
                             R.drawable.ic_account_circle_black_36dp));
                 } else {
-                    Glide.with(MainActivity.this)
+                    Glide.with(ChatActivity.this)
                             .load(friendlyMessage.getPhotoUrl())
                             .into(viewHolder.messengerImageView);
                 }
@@ -374,7 +364,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
     private void putImageInStorage(StorageReference storageReference, Uri uri, final String key) {
-        storageReference.putFile(uri).addOnCompleteListener(MainActivity.this,
+        storageReference.putFile(uri).addOnCompleteListener(ChatActivity.this,
                 new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {

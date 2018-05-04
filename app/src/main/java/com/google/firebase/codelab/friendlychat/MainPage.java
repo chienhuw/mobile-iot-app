@@ -35,4 +35,8 @@ public class MainPage extends AppCompatActivity {
         Intent intent = new Intent(this, UserList.class);
         startActivity(intent);
     }
+    public void toChatHistory(View view){
+        Intent intent = new Intent(this,ChatList.class);
+        startActivity(intent);
+    }
 }

@@ -20,7 +20,7 @@
             android:value="AIzaSyC6ITusbdPScpR2a-80rNFqhIpQFNHXbaM" />
 
         <activity android:name=".UserProfile" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ChatActivity" />
         <activity android:name=".SignInActivity" />
 
         <service
@@ -47,6 +47,7 @@
         </activity>
         <activity android:name=".MainPage" />
         <activity android:name=".UserList"></activity>
+        <activity android:name=".ChatList"/>
     </application>
 
 </manifest>

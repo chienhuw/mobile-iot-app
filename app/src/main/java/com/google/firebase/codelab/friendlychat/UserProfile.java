@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -24,10 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by saurabh on 4/2/18.
@@ -167,7 +161,7 @@ public class UserProfile extends Activity
 //        );
     }
     public void startChatScreen(View view){
-        Intent intent = new Intent(UserProfile.this,MainActivity.class);
+        Intent intent = new Intent(UserProfile.this,ChatActivity.class);
         intent.putExtra("userid",user.userid);
         UserProfile.this.startActivity(intent);
         //startActivity(intent);
