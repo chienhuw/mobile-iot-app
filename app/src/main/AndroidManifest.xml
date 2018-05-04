@@ -22,6 +22,7 @@
         <activity android:name=".UserProfile" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SignInActivity" />
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
@@ -29,7 +30,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".MyFirebaseInstanceIdService"
             android:exported="false">
@@ -45,7 +45,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainPage"></activity>
+        <activity android:name=".MainPage" />
+        <activity android:name=".UserList"></activity>
     </application>
 
 </manifest>

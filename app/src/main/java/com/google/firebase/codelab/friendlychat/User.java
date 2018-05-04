@@ -36,4 +36,8 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.checkCar = checkCar;
     }
+    @Override
+    public String toString() {
+        return username;
+    }
 }
