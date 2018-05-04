@@ -16,11 +16,13 @@ public class User {
     public String bio;
     public String phoneNumber;
     public String dropoffAddress;
+    public boolean checkCar;
+
     User(){
 
     }
 
-    User(String userid, String username, String profilePhoto, String latitude, String longitude, String pickupAddress, String pName, String dropoffAddress, String dName, String bio, String phoneNumber){
+    User(String userid, String username, String profilePhoto, String latitude, String longitude, String pickupAddress, String pName, String dropoffAddress, String dName, String bio, String phoneNumber, boolean checkCar){
         this.userid = userid;
         this.username = username;
         this.profilePhoto = profilePhoto;
@@ -32,5 +34,6 @@ public class User {
         this.dropoffAddress =dropoffAddress;
         this.pickupAddress =pickupAddress;
         this.phoneNumber = phoneNumber;
+        this.checkCar = checkCar;
     }
 }

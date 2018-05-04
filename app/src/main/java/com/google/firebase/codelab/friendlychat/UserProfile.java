@@ -52,10 +52,7 @@ public class UserProfile extends Activity
         setContentView(R.layout.layout_userprofile);
         ImageView imageViewpp=(ImageView) findViewById(R.id.profilePhoto);
         imageViewpp.setImageResource(R.drawable.profile_picture);
-        ImageView imageViewFriend1=(ImageView) findViewById(R.id.imageFriend1);
-        imageViewFriend1.setImageResource(R.drawable.dp1);
-        ImageView imageViewFriend2=(ImageView) findViewById(R.id.imageFriend2);
-        imageViewFriend2.setImageResource(R.drawable.dp2);
+
 
         mUsername = ANONYMOUS;
         // Initialize Firebase Auth
@@ -84,10 +81,16 @@ public class UserProfile extends Activity
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         user = dataSnapshot.getValue(User.class);
                         Log.d(TAG, "Retreived user " + user.userid + " with name " + user.username);
+
                         TextView bio = findViewById(R.id.bio);
                         bio.setText(user.bio);
                         TextView userTitle = findViewById(R.id.titleUser);
                         userTitle.setText(user.username);
+                        TextView dropPlace = findViewById(R.id.activityPlace);
+                        dropPlace.setText(user.dName);
+                        TextView pickPlace = findViewById(R.id.textView4);
+                        pickPlace.setText(user.pName);
+
                         if (user == null) {
                             Log.e(TAG, "User " + userId + " is NULL UNIQUE");
                         } else {
@@ -128,10 +131,17 @@ public class UserProfile extends Activity
                 }
             });
             Log.d(TAG, "Retreived user " + user.userid + " with name " + user.username);
+
             TextView bio = findViewById(R.id.bio);
             bio.setText(user.bio);
             TextView userTitle = findViewById(R.id.titleUser);
             userTitle.setText(user.username);
+
+
+            TextView dropPlace = findViewById(R.id.activityPlace);
+            dropPlace.setText(user.dName);
+            TextView pickPlace = findViewById(R.id.textView4);
+            pickPlace.setText(user.pName);
         }
 
 //        mDatabase.child(mUsersChild).child(user1.userid).addListenerForSingleValueEvent(
